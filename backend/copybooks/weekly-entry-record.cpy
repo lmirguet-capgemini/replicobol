@@ -1,0 +1,5 @@
+       01 WEEKLY-ENTRY-RECORD.
+          05 ENTRY-PROJECT-CODE  PIC X(32).
+          05 ENTRY-WEEK-START    PIC X(10).
+          05 ENTRY-DAYS          PIC X(8).
+          05 ENTRY-UPDATED-AT    PIC X(32).

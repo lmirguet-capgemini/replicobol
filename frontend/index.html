@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Replicobol</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <h1>Replicobol</h1>
+        <p>Local weekly project timesheet</p>
+      </div>
+      <output id="save-status" class="status" aria-live="polite"></output>
+    </header>
+
+    <section class="panel" aria-labelledby="project-heading">
+      <h2 id="project-heading">Projects</h2>
+      <form id="project-form" class="project-form">
+        <label>Client name<input name="client_name" autocomplete="organization" required></label>
+        <label>Project name<input name="project_name" required></label>
+        <label>Project code<input name="project_code" required></label>
+        <button type="submit">Save Project</button>
+      </form>
+      <p id="project-error" class="error" role="alert"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="calendar-heading">
+      <div class="calendar-toolbar">
+        <h2 id="calendar-heading">Calendar</h2>
+        <label>Start week<input id="start-week" type="date"></label>
+      </div>
+      <div id="calendar-grid" class="calendar-grid" aria-live="polite"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

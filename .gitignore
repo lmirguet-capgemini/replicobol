@@ -1,3 +1,12 @@
 helloworld
 *.o
 *.so
+backend/cgi/projects
+backend/cgi/timesheet
+backend/cgi/calendar
+*.log
+.env*
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

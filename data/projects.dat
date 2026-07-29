@@ -1,0 +1,4 @@
+# Replicobol projects data
+# Format: project_code|client_name|project_name|created_at
+ACME-MIG|Acme|Migration|20260730
+BETA-SUP|Beta|Support|20260730
