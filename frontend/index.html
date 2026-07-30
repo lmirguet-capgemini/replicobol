@@ -3,38 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Replicobol</title>
+  <title>Replicobol Timesheets</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="app-shell">
-    <header class="app-header">
-      <div>
-        <h1>Replicobol</h1>
-        <p>Local weekly project timesheet</p>
-      </div>
-      <output id="save-status" class="status" aria-live="polite"></output>
-    </header>
-
-    <section class="panel" aria-labelledby="project-heading">
-      <h2 id="project-heading">Projects</h2>
-      <form id="project-form" class="project-form">
-        <label>Client name<input name="client_name" autocomplete="organization" required></label>
-        <label>Project name<input name="project_name" required></label>
-        <label>Project code<input name="project_code" required></label>
-        <button type="submit">Save Project</button>
-      </form>
+  <div class="dashboard-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#dashboard">REPLICO<span>BOL</span></a>
+      <nav>
+        <a class="nav-link is-active" href="#dashboard" aria-current="page"><i data-lucide="clock-3" aria-hidden="true"></i>Timesheet</a>
+      </nav>
+      <p class="sidebar-note"><i data-lucide="circle-help" aria-hidden="true"></i>Local workspace</p>
+    </aside>
+    <main id="dashboard" class="workspace">
+      <header class="workspace-header">
+        <div><h1>Timesheet Management</h1></div>
+        <output id="save-status" class="notification" data-state="blank" aria-live="polite"><span id="save-status-message"></span></output>
+      </header>
+      <section class="period-toolbar" aria-label="Selected period controls">
+        <span class="toolbar-label">Select period</span>
+        <label class="date-control"><i data-lucide="calendar-days" aria-hidden="true"></i><span id="period-label">Loading period...</span><span class="sr-only">Start week</span><input id="start-week" type="date"></label>
+        <button id="create-project" class="primary-action" type="button"><i data-lucide="plus" aria-hidden="true"></i>New Project</button>
+      </section>
+      <section class="metrics" aria-label="Timesheet progress">
+        <article class="metric metric-declared"><i data-lucide="calendar-days" aria-hidden="true"></i><div><strong id="declared-days">-</strong><span>Days declared</span><small id="declared-period">Selected period</small></div></article>
+        <article class="metric metric-projects"><i data-lucide="briefcase-business" aria-hidden="true"></i><div><strong id="active-projects">-</strong><span>Active projects</span><small>Current workspace</small></div></article>
+        <article class="metric metric-missing"><i data-lucide="triangle-alert" aria-hidden="true"></i><div><strong id="missing-declarations">-</strong><span>Missing declarations</span><small id="missing-window">-</small></div></article>
+      </section>
+      <section class="timesheet-workspace" aria-labelledby="timesheet-heading">
+        <div class="grid-heading"><div><h2 id="timesheet-heading">Projects</h2><span>Client / Project code</span></div><span id="week-count"></span></div>
+        <div id="calendar-grid" class="calendar-grid" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+  <dialog id="project-dialog" aria-labelledby="project-dialog-title">
+    <form id="project-form" class="project-form" method="dialog">
+      <div class="dialog-heading"><h2 id="project-dialog-title">New Project</h2><button id="close-project-dialog" class="icon-button" type="button" aria-label="Close project creation"><i data-lucide="x" aria-hidden="true"></i></button></div>
+      <label>Client name<input name="client_name" autocomplete="organization" required></label>
+      <label>Project name<input name="project_name" required></label>
+      <label>Project code<input name="project_code" required></label>
       <p id="project-error" class="error" role="alert"></p>
-    </section>
-
-    <section class="panel" aria-labelledby="calendar-heading">
-      <div class="calendar-toolbar">
-        <h2 id="calendar-heading">Calendar</h2>
-        <label>Start week<input id="start-week" type="date"></label>
-      </div>
-      <div id="calendar-grid" class="calendar-grid" aria-live="polite"></div>
-    </section>
-  </main>
+      <button type="submit" class="primary-action">Create project</button>
+    </form>
+  </dialog>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

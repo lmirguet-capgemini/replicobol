@@ -1,10 +1,10 @@
 <!--
 Sync Impact Report
-Version change: N/A -> 1.0.0
-Modified principles: Initial constitution; no prior principles existed
-Added sections: Core Principles, Technical Constraints, Development Workflow, Governance
-Removed sections: Template placeholders and instructional comments
-Follow-up TODOs: None
+Version change: 1.0.0 -> 2.0.0
+Modified principles: IV. Web Frontend Clarity now governs weekly, rather than daily, time entry
+Added sections: None
+Removed sections: None
+Follow-up TODOs: Existing feature specifications and plans remain compatible because the baseline product stores weekly project-day entries.
 -->
 
 # Replicobol Constitution
@@ -30,7 +30,7 @@ than duplicating backend rules. Rationale: keeping authority in the Cobol backen
 portable, auditable, and consistent across user interfaces.
 
 ### IV. Web Frontend Clarity
-The web frontend MUST make daily time entry, project selection, correction, and review flows direct
+The web frontend MUST make weekly time entry, project selection, correction feedback, and review flows direct
 and inspectable. UI states MUST show whether data is unsaved, saved, invalid, or failed to persist.
 Rationale: time tracking succeeds only when routine entry is fast and mistakes are visible before
 they become records.
@@ -77,4 +77,4 @@ MINOR changes add principles, sections, or materially expanded guidance; PATCH c
 without changing obligations. Compliance review is required during planning and before implementation:
 plans and tasks MUST identify how they satisfy the Core Principles and Technical Constraints.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-29 | **Last Amended**: 2026-07-29
+**Version**: 2.0.0 | **Ratified**: 2026-07-29 | **Last Amended**: 2026-07-30

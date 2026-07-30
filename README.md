@@ -9,6 +9,12 @@ The first version lets you:
 - view a Monday-to-Friday weekly calendar
 - keep local correction records when an existing timesheet entry changes
 
+## Dashboard Usage
+
+The timesheet opens as a dashboard with a selected-period control, backend-owned summary metrics, and a dense project-by-week grid. Edit a cell to see its unsaved state, then leave the field to save through the existing timesheet endpoint. Use **New project** to open the focused project-creation dialog.
+
+The visual direction is documented by the local `design.png` reference: a dark persistent navigation area, restrained light workspace, compact metrics, and a horizontally scrollable grid on narrow screens. The redesign deliberately does not add project lifecycle, export, authentication, or cloud synchronization workflows.
+
 ## Project Layout
 
 ```text
