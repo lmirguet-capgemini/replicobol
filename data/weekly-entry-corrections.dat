@@ -1,4 +1,5 @@
 # Replicobol weekly entry correction data
 # Format: project_code|week_start|prior_days|replacement_days|replaced_at
-ACME-MIG|2026-07-27|2.5|3|20260730
-ACME-MIG|2026-07-27|2.5|3|20260730
+ACME-MIG|2026-07-20|2|4|20260730
+BETA-SUP|2026-07-27|1.5|1|20260731
+BETA-SUP|2026-07-27|1|1.5|20260731

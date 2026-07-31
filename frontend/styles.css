@@ -56,7 +56,7 @@ h2 { font-size: 1rem; }
 .primary-action svg { width: 19px; }
 .primary-action:hover { background: var(--primary-bright); }
 .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0 0 18px; }
-.metric { display: flex; align-items: flex-start; gap: 20px; min-height: 145px; padding: 23px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 7px 18px rgba(25, 72, 146, .04); }
+.metric { display: flex; align-items: flex-start; gap: 20px; min-height: 80px; padding: 10px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 7px 18px rgba(25, 72, 146, .04); }
 .metric > svg { flex: 0 0 auto; width: 54px; height: 54px; padding: 15px; color: white; border-radius: 50%; box-shadow: 0 7px 14px rgba(0, 85, 200, .2); }
 .metric-declared > svg { background: var(--primary); }
 .metric-projects > svg { background: var(--cyan); }
@@ -73,11 +73,19 @@ h2 { font-size: 1rem; }
 .calendar-table { width: 100%; min-width: 0; table-layout: fixed; border-collapse: collapse; font-size: .8rem; }
 .calendar-table th, .calendar-table td { padding: 8px 5px; text-align: right; vertical-align: middle; border-right: 1px solid #e5eaf4; border-bottom: 1px solid #e5eaf4; }
 .calendar-table thead th { position: sticky; top: 0; color: var(--ink); background: #f8faff; font-size: .68rem; text-align: center; white-space: nowrap; }
+.week-number, .week-date { display: block; }
+.week-number { color: var(--primary); font-weight: 800; }
+.week-date { margin-top: 2px; font-weight: 600; }
 .calendar-table .project-cell, .calendar-table .project-header { position: sticky; left: 0; z-index: 1; width: 190px; min-width: 190px; text-align: left; background: white; }
 .calendar-table .project-header { z-index: 2; background: #f8faff; }
 .project-code { color: var(--muted); font-size: .72rem; }
 .total-cell { width: 58px; min-width: 58px; color: var(--ink); background: #fbfcff; font-weight: 800; }
 .period-total th, .period-total td { color: var(--ink); background: #eef5ff; font-weight: 800; }
+.calendar-table thead th.week-current { background: #dceeff; }
+.calendar-table td.week-current { background: #f0f7ff; }
+.calendar-table .period-total td.week-current { background: #dceeff; }
+.period-total td.period-total-complete, .period-total td.period-total-complete.week-current { color: #076b3f; background: #e4f6eb; }
+.period-total td.period-total-overdue, .period-total td.period-total-overdue.week-current { color: #b53b2b; background: #fff0ee; }
 .day-value { width: 100%; min-height: 28px; padding: 4px 2px; color: var(--ink); border: 1px solid transparent; border-radius: 4px; background: transparent; font-weight: 700; }
 .day-value:hover, .day-value:focus-visible { border-color: #b7c9ea; background: white; outline: 0; }
 .day-input { width: 100%; min-width: 0; min-height: 30px; padding: 4px; color: var(--ink); text-align: right; border: 1px solid #8eafdf; border-radius: 4px; background: white; }

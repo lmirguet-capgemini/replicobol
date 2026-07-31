@@ -11,6 +11,7 @@ BETA-SUP|Beta|Support|20260730
 GAMMA-OPS|Gamma|Operations|20260730
 DELTA-UX|Delta|UX Review|20260730
 EPSILON-QA|Epsilon|Quality Assurance|20260730
+ZETA-EMPTY|Zeta|Empty Project|20260730
 DATA
 
 cat > "$ROOT_DIR/data/weekly-entries.dat" <<'DATA'
@@ -22,12 +23,15 @@ BETA-SUP|2026-05-04|2|20260730
 GAMMA-OPS|2026-05-11|1|20260730
 DELTA-UX|2026-05-11|1|20260730
 EPSILON-QA|2026-05-11|1|20260730
-ACME-MIG|2026-07-27|2.5|20260730
+ACME-MIG|2026-07-20|4|20260730
+ACME-MIG|2026-07-27|3.5|20260731
 BETA-SUP|2026-07-27|1.5|20260730
 GAMMA-OPS|2026-08-03|3|20260730
+EPSILON-QA|2026-08-03|0|20260730
 DATA
 
 cat > "$ROOT_DIR/data/weekly-entry-corrections.dat" <<'DATA'
 # Replicobol weekly entry correction data
 # Format: project_code|week_start|prior_days|replacement_days|replaced_at
+ACME-MIG|2026-07-20|2|4|20260730
 DATA

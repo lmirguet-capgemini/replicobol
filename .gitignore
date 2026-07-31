@@ -1,6 +1,11 @@
 helloworld
 *.o
 *.so
+*.class
+*.jar
+build/
+.idea/
+.vscode/
 backend/cgi/projects
 backend/cgi/timesheet
 backend/cgi/calendar

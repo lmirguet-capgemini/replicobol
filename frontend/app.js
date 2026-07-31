@@ -44,12 +44,6 @@ const api = async (url, options = {}) => {
   return JSON.parse(jsonStart >= 0 ? text.slice(jsonStart) : text);
 };
 
-const mondayForToday = () => {
-  const date = new Date();
-  const day = date.getDay() || 7;
-  date.setDate(date.getDate() - day + 1);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-};
 const renderSummary = (summary = {}) => {
   declaredDays.textContent = formatDays(summary.declared_days);
   activeProjects.textContent = formatDays(summary.active_projects);
@@ -68,22 +62,25 @@ const renderCalendar = (data) => {
     calendarGrid.innerHTML = '<p class="blank-note">No projects yet. Create a project to begin recording weekly time.</p>';
     return;
   }
-  const weekHeaders = weeks.map((week) => `<th scope="col">${escapeHtml(week.week_start)}</th>`).join('');
-  const weekTotals = weeks.map((week, index) => data.rows.reduce((total, row) => total + Number(row.cells[index]?.display_value || 0), 0));
+  const weekHeaders = weeks.map((week) => `<th class="${week.is_current_week ? 'week-current' : ''}" scope="col"><span class="week-number">Week ${escapeHtml(week.iso_week_number)}</span><span class="week-date">${escapeHtml(week.week_start)}</span></th>`).join('');
   const rows = data.rows.map((row) => {
-    const cells = row.cells.map((cell) => `<td class="cell-${cell.status}" data-project-code="${escapeHtml(row.project.project_code)}" data-week-start="${escapeHtml(cell.week_start)}" data-value="${escapeHtml(cell.display_value)}"><button class="day-value" type="button" aria-label="Edit ${escapeHtml(row.project.project_code)} for week ${escapeHtml(cell.week_start)}">${cell.display_value === '' ? '-' : formatDays(cell.display_value)}</button></td>`).join('');
-    return `<tr><th scope="row" class="project-cell">${escapeHtml(row.project.client_name)}<br><strong>${escapeHtml(row.project.project_name)}</strong><br><span class="project-code">${escapeHtml(row.project.project_code)}</span></th>${cells}<td class="total-cell">${formatDays(row.total_days)}</td></tr>`;
+    const cells = row.cells.map((cell, index) => {
+      const isBlank = cell.display_value === '' || cell.display_value === 0;
+      const currentWeekClass = weeks[index]?.is_current_week ? ' week-current' : '';
+      return `<td class="cell-${cell.status}${currentWeekClass}" data-project-code="${escapeHtml(row.project.project_code)}" data-week-start="${escapeHtml(cell.week_start)}" data-value="${escapeHtml(cell.display_value)}"><button class="day-value" type="button" aria-label="Edit ${escapeHtml(row.project.project_code)} for week ${escapeHtml(cell.week_start)}">${isBlank ? '' : formatDays(cell.display_value)}</button></td>`;
+    }).join('');
+    return `<tr><th scope="row" class="project-cell">${escapeHtml(row.project.client_name)} : <strong>${escapeHtml(row.project.project_name)}</strong><br><span class="project-code">${escapeHtml(row.project.project_code)}</span></th>${cells}<td class="total-cell">${formatDays(row.lifetime_total_days)}</td></tr>`;
   }).join('');
-  const periodCells = weekTotals.map((total) => `<td>${formatDays(total)}</td>`).join('');
+  const periodCells = weeks.map((week) => `<td class="period-total-${escapeHtml(week.period_total_status)}${week.is_current_week ? ' week-current' : ''}">${formatDays(week.period_total_days)}</td>`).join('');
   calendarGrid.innerHTML = `<table class="calendar-table"><thead><tr><th class="project-header" scope="col">Project</th>${weekHeaders}<th scope="col">Total</th></tr></thead><tbody>${rows}<tr class="period-total"><th scope="row">Period total</th>${periodCells}<td>${formatDays(data.period_total_days)}</td></tr></tbody></table>`;
   renderIcons();
 };
 
 const loadCalendar = async () => {
-  const startWeek = startWeekInput.value || mondayForToday();
-  startWeekInput.value = startWeek;
+  const query = new URLSearchParams({ week_count: '12' });
+  if (startWeekInput.value) query.set('start_week', startWeekInput.value);
   try {
-    const result = await api(`/cgi-bin/calendar?start_week=${encodeURIComponent(startWeek)}&week_count=12`);
+    const result = await api(`/cgi-bin/calendar?${query}`);
     if (!result.ok) throw new Error(result.error.message);
     renderCalendar(result.data);
   } catch (error) {
